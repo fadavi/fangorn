@@ -7,10 +7,6 @@ if TYPE_CHECKING:
     from .fighter import Fighter
 
 
-def niy():
-    raise NotImplementedError()
-
-
 class BattleRunner(ABC):
     def __init__(self, battle: 'Battle', max_attacks: int) -> None:
         self._battle = battle
@@ -57,32 +53,32 @@ class BattleRunner(ABC):
 
     @abstractmethod
     def on_not_attacking(self, nth_attack: int, attacker: 'Fighter'):
-        niy()
+        pass
 
     @abstractmethod
     def on_start(self, battle: 'Battle'):
-        niy()
+        pass
 
     @abstractmethod
     def on_win(self, winners: 'Iterable[Fighter]'):
-        niy()
+        pass
 
     @abstractmethod
     def on_draw(self):
-        niy()
+        pass
 
     @abstractmethod
     def on_peace(self, n_attacks: int):
-        niy()
+        pass
 
     @abstractmethod
     def on_before_attack(self, nth_attack: int, attack: 'Attack'):
-        niy()
+        pass
 
     @abstractmethod
     def on_attack_finished(self, nth_attack: int, attack: 'Attack'):
-        niy()
+        pass
 
     @abstractmethod
     def on_affected(self, nth_attack: int, attack: 'Attack'):
-        niy()
+        pass
