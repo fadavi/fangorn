@@ -2,7 +2,7 @@ from typing import TYPE_CHECKING
 from random import Random
 from string import ascii_lowercase
 if TYPE_CHECKING:
-    from fangorn.seed import Seed
+    from ..seed.seed import Seed
 
 
 VOWELS = 'aeiou'
