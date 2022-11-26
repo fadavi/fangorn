@@ -5,7 +5,7 @@ from .fighter_factory import FighterFactory
 from .parse_args import parse_args
 from .models.destiny import Destiny
 from .models.battle import Battle
-from . import seed
+from .seed import seed
 if TYPE_CHECKING:
     from collections.abc import Iterable
     from .models.fighter import Fighter

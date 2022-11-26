@@ -27,8 +27,8 @@ def parse_team_arrange(team: str):
         raise RuntimeError(f'Invalid team arrange: "{team}"') from ex
 
     if len(parts) < 2:
-        raise RuntimeError(
-            'Team arrange should contain the team name and at least one fighter')
+        raise RuntimeError('Team arrange should contain the team name and ' +
+                           'at least one fighter')
 
     name: str = parts[0]
     fighters: list[str] = parts[1:]
