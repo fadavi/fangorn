@@ -103,5 +103,5 @@ def main():
     battle = Battle(destiny, fighters)
     runner = CliBattleRunner(battle, opts.max_attacks, opts.delay)
 
-    while (runner.finish_next_attack()):
+    while runner.finish_next_attack():
         pass
