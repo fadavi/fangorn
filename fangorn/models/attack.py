@@ -8,7 +8,7 @@ if TYPE_CHECKING:
 class Attack:
     def __init__(self, destiny: 'Destiny', attacker: 'Fighter',
                  defender: 'Fighter'):
-        if attacker.team == defender.team:
+        if attacker.is_teammate(defender):
             raise ValueError("We don't do friendly fire!")
 
         self._destiny = destiny

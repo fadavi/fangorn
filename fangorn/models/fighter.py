@@ -84,5 +84,5 @@ class Fighter(ABC):
     def choose_target(self, fighters: 'Iterable[Fighter]'):
         # For now, let's always attack the weakest one:
         potential_targets = (
-            f for f in fighters if f.alive and f.team != self.team)
+            f for f in fighters if f.alive and not self.is_teammate(f))
         return min(potential_targets, default=None, key=lambda f: f.health)

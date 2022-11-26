@@ -66,7 +66,7 @@ class Battle(ABC):
         first_alive = next(alive_fighters, None)
         if first_alive is None:
             return None
-        if any(af for af in alive_fighters if af.team != first_alive.team):
+        if any(af for af in alive_fighters if af.is_teammate(first_alive)):
             return None
 
         return self.alive_fighters()
