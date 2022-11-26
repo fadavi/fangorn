@@ -23,8 +23,8 @@ class CliOptions:
 def parse_team_arrange(team: str):
     try:
         parts = re.findall(TEAM_PATTERN, team)
-    except BaseException:
-        raise RuntimeError(f'Invalid team arrange: "{team}"')
+    except BaseException as ex:
+        raise RuntimeError(f'Invalid team arrange: "{team}"') from ex
 
     if len(parts) < 2:
         raise RuntimeError(

@@ -35,8 +35,8 @@ def deserialize(payload_enc: str) -> Seed:
     try:
         payload_json = b64decode(payload_enc.encode('ascii') + b'==')
         payload = json.loads(payload_json)
-    except BaseException:
-        raise RuntimeError('Invalid seed')
+    except BaseException as ex:
+        raise RuntimeError('Invalid seed') from ex
 
     if not isinstance(payload, list) or len(payload) != 2:
         raise RuntimeError('Invalid seed')
