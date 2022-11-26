@@ -1,4 +1,5 @@
 from argparse import ArgumentParser
+from dataclasses import dataclass
 import re
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
@@ -11,13 +12,12 @@ DEFAULT_MAX_ATTACKS = 20
 TEAM_PATTERN = r'\s*([^,:]+)(?::|,|$)'
 
 
+@dataclass
 class CliOptions:
-    def __init__(self, seed: str | None, max_attacks: int,
-                 teams: list[tuple[str, list[str]]], delay: float):
-        self.seed = seed
-        self.max_attacks = max_attacks
-        self.teams = teams
-        self.delay = delay
+    seed: str | None
+    max_attacks: int
+    teams: list[tuple[str, list[str]]]
+    delay: float
 
 
 def parse_team_arrange(team: str):
