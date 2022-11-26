@@ -24,8 +24,8 @@ class CliBattleRunner(BattleRunner):
     def fighter(self, fighter: 'Fighter'):
         return f'{fighter.name}@{fighter.team}'
 
-    def decimal(self, f: float):
-        return '%+.2f' % f
+    def decimal(self, num: float):
+        return '%+.2f' % num
 
     def print(self, message: str):
         print(message)
