@@ -3,7 +3,7 @@ from abc import ABC
 from .effect import PrimaryStrike, PrimaryDefence
 if TYPE_CHECKING:
     from collections.abc import Iterable
-    from .skills.skill import Skill
+    from .skill.skill import Skill
     from .attack import Attack
 
 

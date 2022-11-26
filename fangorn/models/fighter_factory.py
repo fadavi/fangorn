@@ -2,8 +2,8 @@ from abc import ABC, abstractmethod
 from collections.abc import Iterable
 from typing import TYPE_CHECKING, Callable
 from .fighter import Fighter
-from .skills.magic_shield import MagicShield
-from .skills.rapid_strike import RapidStrike
+from .skill.magic_shield import MagicShield
+from .skill.rapid_strike import RapidStrike
 if TYPE_CHECKING:
     from .destiny import Destiny
 
