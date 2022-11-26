@@ -60,10 +60,6 @@ class Battle(ABC):
     def is_draw(self):
         return not any(self.alive_fighters())
 
-    def teams_sorted_by_attacks(self):
-        sorted_items = sorted(self._attack_counts.items(), key=lambda e: e[1])
-        return (t for t, _ in sorted_items)
-
     def winners(self):
         alive_fighters = self.alive_fighters()
 
