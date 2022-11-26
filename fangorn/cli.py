@@ -24,7 +24,7 @@ class CliBattleRunner(BattleRunner):
     def fighter(self, fighter: 'Fighter'):
         return f'{fighter.name}@{fighter.team}'
 
-    def float(self, f: float):
+    def decimal(self, f: float):
         return '%+.2f' % f
 
     def print(self, message: str):
@@ -65,7 +65,7 @@ class CliBattleRunner(BattleRunner):
 
     def on_attack_finished(self, _: int, attack: 'Attack'):
         for effect in attack.effects:
-            health_effect = self.float(effect.health_effect)
+            health_effect = self.decimal(effect.health_effect)
             msg = ''
             if effect.fighter is not None:
                 msg += self.fighter(effect.fighter) + ': '
@@ -78,7 +78,7 @@ class CliBattleRunner(BattleRunner):
     def on_affected(self, _: int, attack: 'Attack'):
         defender = self.fighter(attack.defender)
         if attack.defender.alive:
-            health = self.float(attack.defender.health)
+            health = self.decimal(attack.defender.health)
             self.print(f'{defender} health: {health}')
         else:
             self.print(f'{defender} died! RIP.')
