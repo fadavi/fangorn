@@ -1,11 +1,11 @@
 from abc import ABC, abstractmethod
 from collections.abc import Iterable
 from typing import TYPE_CHECKING, Callable
-from .models.fighter import Fighter
-from .models.skills.magic_shield import MagicShield
-from .models.skills.rapid_strike import RapidStrike
+from .fighter import Fighter
+from .skills.magic_shield import MagicShield
+from .skills.rapid_strike import RapidStrike
 if TYPE_CHECKING:
-    from .models.destiny import Destiny
+    from .destiny import Destiny
 
 
 FighterCreator = Callable[[str], Fighter]
