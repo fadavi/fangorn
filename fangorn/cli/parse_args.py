@@ -16,7 +16,7 @@ TEAM_PATTERN = r'\s*([^,:]+)(?::|,|$)'
 class CliOptions:
     seed: str | None
     max_attacks: int
-    teams: list[tuple[str, list[str]]]
+    teams: dict[str, list[str]]
     delay: float
 
 
@@ -37,9 +37,9 @@ def parse_team_arrange(team: str):
 
 def team_arranges(teams: 'Iterable[str] | None'):
     if teams is None:
-        return [('Hunters', ['orderus']),
-                ('Beasts', ['beast'])]
-    return [parse_team_arrange(t) for t in teams]
+        return dict(Hunters=['orderus'],
+                    Beasts=['beast'])
+    return dict(parse_team_arrange(t) for t in teams)
 
 
 def parse_args():

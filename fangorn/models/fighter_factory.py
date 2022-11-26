@@ -1,10 +1,10 @@
 from abc import ABC, abstractmethod
-from collections.abc import Iterable
 from typing import TYPE_CHECKING, Callable
 from .fighter import Fighter
 from .skill.magic_shield import MagicShield
 from .skill.rapid_strike import RapidStrike
 if TYPE_CHECKING:
+    from collections.abc import Iterable
     from .destiny import Destiny
 
 
@@ -24,8 +24,8 @@ class BaseFighterFactory(ABC):
         return create(team)
 
     def by_team_arranges(self,
-                         team_arranges: Iterable[tuple[str, Iterable[str]]]):
-        for team, fighter_names in team_arranges:
+                         team_arranges: dict[str, 'Iterable[str]']):
+        for team, fighter_names in team_arranges.items():
             for fighter_name in fighter_names:
                 yield self.by_name(team, fighter_name)
 
