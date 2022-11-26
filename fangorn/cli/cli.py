@@ -1,15 +1,15 @@
 from typing import TYPE_CHECKING
 from time import sleep
-from .models.battle_runner import BattleRunner
-from .models.fighter_factory import FighterFactory
+from ..models.battle_runner import BattleRunner
+from ..models.fighter_factory import FighterFactory
 from .parse_args import parse_args
-from .models.destiny import Destiny
-from .models.battle import Battle
-from .seed import seed
+from ..models.destiny import Destiny
+from ..models.battle import Battle
+from ..seed import seed
 if TYPE_CHECKING:
     from collections.abc import Iterable
-    from .models.fighter import Fighter
-    from .models.attack import Attack
+    from ..models.fighter import Fighter
+    from ..models.attack import Attack
 
 
 class CliBattleRunner(BattleRunner):
