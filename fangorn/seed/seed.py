@@ -2,7 +2,7 @@ from base64 import b64decode, b64encode
 from random import randrange
 from sys import maxsize
 import json
-from .. import __version__ as version
+from fangorn import __version__ as version
 from .encode_int import encode_int
 
 

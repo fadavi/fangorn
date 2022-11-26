@@ -1,6 +1,6 @@
 from typing import TYPE_CHECKING
+from fangorn.models.effect import PrimaryDefence, PositiveEffect
 from .skill import Skill
-from ..effect import PrimaryDefence, PositiveEffect
 if TYPE_CHECKING:
     from fighter import Fighter
     from attack import Attack
