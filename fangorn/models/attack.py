@@ -36,15 +36,15 @@ class Attack:
         return iter(self._effects)
 
     def find_effect(self, effect_type: type['Effect']):
-        return next(
-            (e for e in self.effects if isinstance(e, effect_type)),
-            None,
-        )
+        for e in self.effects:
+            if isinstance(e, effect_type):
+                return e
+        return None
 
     @property
     def total_negative_effect(self):
-        return sum(
-            e.health_effect for e in self.effects if e.health_effect < 0)
+        negs = (e.health_effect for e in self.effects if e.health_effect < 0)
+        return sum(negs)
 
     @property
     def health_effect(self) -> float:

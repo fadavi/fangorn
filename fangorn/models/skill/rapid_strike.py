@@ -29,6 +29,5 @@ class RapidStrike(Skill):
 
         for _ in range(self._max_repeats):
             if attack.destiny.decide(self._probability):
-                attack.add_effect(
-                    self.create_effect(
-                        owner, primary_strike.health_effect))
+                eff = self.create_effect(owner, primary_strike.health_effect)
+                attack.add_effect(eff)

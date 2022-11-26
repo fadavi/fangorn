@@ -28,6 +28,5 @@ class MagicShield(Skill):
             return
 
         if attack.destiny.decide(self._probability):
-            attack.add_effect(
-                self.create_effect(
-                    owner, primary_defence.health_effect))
+            eff = self.create_effect(owner, primary_defence.health_effect)
+            attack.add_effect(eff)

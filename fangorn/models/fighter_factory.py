@@ -23,8 +23,8 @@ class BaseFighterFactory(ABC):
             raise RuntimeError(f'Invalid fighter "{name}"')
         return create(team)
 
-    def by_team_arranges(
-            self, team_arranges: Iterable[tuple[str, Iterable[str]]]):
+    def by_team_arranges(self,
+                         team_arranges: Iterable[tuple[str, Iterable[str]]]):
         for team, fighter_names in team_arranges:
             for fighter_name in fighter_names:
                 yield self.by_name(team, fighter_name)

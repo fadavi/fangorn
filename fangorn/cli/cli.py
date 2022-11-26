@@ -13,11 +13,10 @@ if TYPE_CHECKING:
 
 
 class CliBattleRunner(BattleRunner):
-    def __init__(
-            self,
-            battle: 'Battle',
-            max_attacks: int,
-            delay: float = 0) -> None:
+    def __init__(self,
+                 battle: 'Battle',
+                 max_attacks: int,
+                 delay: float = 0) -> None:
         super().__init__(battle, max_attacks)
         self._delay = delay
 
