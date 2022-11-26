@@ -2,101 +2,106 @@ from collections.abc import Iterable
 from time import sleep
 from .models.battle_runner import BattleRunner
 from .fighter_factory import FighterFactory
-from .parse_args import parse_args, team_arranges
+from .parse_args import parse_args
 from .models.destiny import Destiny
 from .models.battle import Battle
 from . import seed
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
-  from .models.fighter import Fighter
-  from .models.attack import Attack
+    from .models.fighter import Fighter
+    from .models.attack import Attack
 
 
 class CliBattleRunner(BattleRunner):
-  def __init__(self, battle: 'Battle', max_attacks: int, delay: float = 0) -> None:
-    super().__init__(battle, max_attacks)
-    self._delay = delay
+    def __init__(
+            self,
+            battle: 'Battle',
+            max_attacks: int,
+            delay: float = 0) -> None:
+        super().__init__(battle, max_attacks)
+        self._delay = delay
 
-  def fighter(self, fighter: 'Fighter'):
-    return f'{fighter.name}@{fighter.team}'
+    def fighter(self, fighter: 'Fighter'):
+        return f'{fighter.name}@{fighter.team}'
 
-  def float(self, f: float):
-    return '%+.2f' % f
+    def float(self, f: float):
+        return '%+.2f' % f
 
-  def print(self, message: str):
-    print(message)
-    if self._delay > 0:
-      sleep(self._delay)
+    def print(self, message: str):
+        print(message)
+        if self._delay > 0:
+            sleep(self._delay)
 
-  def on_not_attacking(self, _: int, attacker: 'Fighter'):
-    self.print(f'{attacker.name} somehow decided to do not attack!')
+    def on_not_attacking(self, _: int, attacker: 'Fighter'):
+        self.print(f'{attacker.name} somehow decided to do not attack!')
 
-  def on_start(self, battle: 'Battle'):
-    encoded_seed = seed.serialize(battle.destiny.getseed())
-    self.print(f'BATTLE SEED: {encoded_seed}')
+    def on_start(self, battle: 'Battle'):
+        encoded_seed = seed.serialize(battle.destiny.getseed())
+        self.print(f'BATTLE SEED: {encoded_seed}')
 
-    fighters = list(battle.alive_fighters())
-    self.print(f'There are {len(fighters)} fighters in the battle')
+        fighters = list(battle.alive_fighters())
+        self.print(f'There are {len(fighters)} fighters in the battle')
 
-  def on_win(self, winners: 'Iterable[Fighter]'):
-    winners_list = list(winners)
-    first = winners_list[0]
-    if len(winners_list) == 1:
-      self.print(f'{self.fighter(first)} won the battle!')
-    else:
-      self.print(f'Team {first.team} won the battle')
+    def on_win(self, winners: 'Iterable[Fighter]'):
+        winners_list = list(winners)
+        first = winners_list[0]
+        if len(winners_list) == 1:
+            self.print(f'{self.fighter(first)} won the battle!')
+        else:
+            self.print(f'Team {first.team} won the battle')
 
-  def on_draw(self):
-    self.print("No one is alive; so, it's a draw!?")
+    def on_draw(self):
+        self.print("No one is alive; so, it's a draw!?")
 
-  def on_peace(self, n_attacks: int):
-    self.print(f'Fighters are too tired after {n_attacks} attacks. PEACE!')
+    def on_peace(self, n_attacks: int):
+        self.print(f'Fighters are too tired after {n_attacks} attacks. PEACE!')
 
-  def on_before_attack(self, nth_attack: int, attack: 'Attack'):
-    attacker = self.fighter(attack.attacker)
-    defender = self.fighter(attack.defender)
-    msg = [f'! Attack {nth_attack}:',
-           f'! {attacker} attacks {defender}']
-    self.print('\n'.join(msg))
+    def on_before_attack(self, nth_attack: int, attack: 'Attack'):
+        attacker = self.fighter(attack.attacker)
+        defender = self.fighter(attack.defender)
+        msg = [f'! Attack {nth_attack}:',
+               f'! {attacker} attacks {defender}']
+        self.print('\n'.join(msg))
 
-  def on_attack_finished(self, _: int, attack: 'Attack'):
-    for effect in attack.effects:
-      health_effect = self.float(effect.health_effect)
-      msg = ''
-      if effect.fighter is not None:
-        msg += self.fighter(effect.fighter) + ': '
-      if effect.message is not None:
-        msg += effect.message + f' ({health_effect})'
-      else:
-        msg += health_effect
-      self.print(msg)
+    def on_attack_finished(self, _: int, attack: 'Attack'):
+        for effect in attack.effects:
+            health_effect = self.float(effect.health_effect)
+            msg = ''
+            if effect.fighter is not None:
+                msg += self.fighter(effect.fighter) + ': '
+            if effect.message is not None:
+                msg += effect.message + f' ({health_effect})'
+            else:
+                msg += health_effect
+            self.print(msg)
 
-  def on_affected(self, _: int, attack: 'Attack'):
-    defender = self.fighter(attack.defender)
-    if attack.defender.alive:
-      health = self.float(attack.defender.health)
-      self.print(f'{defender} health: {health}')
-    else:
-      self.print(f'{defender} died! RIP.')
+    def on_affected(self, _: int, attack: 'Attack'):
+        defender = self.fighter(attack.defender)
+        if attack.defender.alive:
+            health = self.float(attack.defender.health)
+            self.print(f'{defender} health: {health}')
+        else:
+            self.print(f'{defender} died! RIP.')
+
 
 def main():
-  opts = parse_args()
+    opts = parse_args()
 
-  the_seed = seed.deserialize_or_generate(opts.seed)
-  destiny = Destiny(the_seed)
+    the_seed = seed.deserialize_or_generate(opts.seed)
+    destiny = Destiny(the_seed)
 
-  team_arranges = opts.teams
-  if len(team_arranges) == 0:
-    team_arranges = [
-      ('Hunters', ['orderus']),
-      ('Beasts', ['beast']),
-    ]
+    team_arranges = opts.teams
+    if len(team_arranges) == 0:
+        team_arranges = [
+            ('Hunters', ['orderus']),
+            ('Beasts', ['beast']),
+        ]
 
-  fighter_factory = FighterFactory(destiny)
-  fighters = list(fighter_factory.by_team_arranges(team_arranges))
+    fighter_factory = FighterFactory(destiny)
+    fighters = list(fighter_factory.by_team_arranges(team_arranges))
 
-  battle = Battle(destiny, fighters)
-  runner = CliBattleRunner(battle, opts.max_attacks, opts.delay)
+    battle = Battle(destiny, fighters)
+    runner = CliBattleRunner(battle, opts.max_attacks, opts.delay)
 
-  while(runner.finish_next_attack()):
-    pass
+    while (runner.finish_next_attack()):
+        pass
