@@ -89,15 +89,8 @@ def main():
     the_seed = seed.deserialize_or_generate(opts.seed)
     destiny = Destiny(the_seed)
 
-    team_arranges = opts.teams
-    if len(team_arranges) == 0:
-        team_arranges = [
-            ('Hunters', ['orderus']),
-            ('Beasts', ['beast']),
-        ]
-
     fighter_factory = FighterFactory(destiny)
-    fighters = list(fighter_factory.by_team_arranges(team_arranges))
+    fighters = list(fighter_factory.by_team_arranges(opts.teams))
 
     battle = Battle(destiny, fighters)
     runner = CliBattleRunner(battle, opts.max_attacks, opts.delay)

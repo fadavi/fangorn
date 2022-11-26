@@ -37,7 +37,8 @@ def parse_team_arrange(team: str):
 
 def team_arranges(teams: 'Iterable[str] | None'):
     if teams is None:
-        return []
+        return [('Hunters', ['orderus']),
+                ('Beasts', ['beast'])]
     return [parse_team_arrange(t) for t in teams]
 
 
