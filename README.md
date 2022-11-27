@@ -23,7 +23,7 @@ $ make tdm # Team Deathmatch
 - [ ] Smarter attack strategy(ies)
 - [ ] More heros/hostiles
 - [ ] More skills
-- [ ] Display specs of heros/hostiles in command-line
+- [ ] Display stats of heros/hostiles in command-line
 - [ ] Re-write CLI using curses
 - [ ] Ability to customize heros/hostiles by a config file
 - [ ] Add user-controlled heros
