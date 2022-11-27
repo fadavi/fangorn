@@ -1,3 +1,5 @@
+![CI Workflow Status](https://github.com/fadavi/fangorn/actions/workflows/ci.yml/badge.svg?branch=main)
+
 # Fangorn
 
 ## Requiremenst
