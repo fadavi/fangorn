@@ -20,6 +20,13 @@ class CliBattleRunner(BattleRunner):
         super().__init__(battle, max_attacks)
         self._delay = delay
 
+    def run(self):
+        try:
+            while self.finish_next_attack():
+                pass
+        except KeyboardInterrupt:
+            self.print('OK bye.')
+
     def fighter(self, fighter: 'Fighter'):
         return f'{fighter.name}@{fighter.team}'
 
@@ -94,6 +101,4 @@ def main():
 
     battle = Battle(destiny, fighters)
     runner = CliBattleRunner(battle, opts.max_attacks, opts.delay)
-
-    while runner.finish_next_attack():
-        pass
+    runner.run()
