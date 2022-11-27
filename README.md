@@ -11,7 +11,8 @@ Directly using python:
 $ python3 -mfangorn
 ```
 
-Using make:
+Or using make:
 ```
-$ make run
+$ make pvp # Orderus vs. Beast
+$ make tdm # Team Deathmatch
 ```

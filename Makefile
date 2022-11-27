@@ -18,3 +18,13 @@ test:
 
 run:
 	@$(PYTHON) -mfangorn $(ARGS)
+
+pvp:
+	@$(PYTHON) -mfangorn
+
+tdm:
+	@$(PYTHON) -mfangorn -d.3 -x10000 \
+		-tHunters:orderus,orderus,orderus,orderus,orderus,orderus \
+		-tBeasts1:beast,beast,beast,beast,beast,beast \
+		-tBeasts2:beast,beast,beast,beast,beast,beast \
+		-tBeasts3:beast,beast,beast,beast,beast,beast
