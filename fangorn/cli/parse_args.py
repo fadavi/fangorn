@@ -3,7 +3,7 @@ from dataclasses import dataclass
 import re
 from typing import TYPE_CHECKING
 if TYPE_CHECKING:
-    from collections.abc import Iterable
+    from collections.abc import Iterable, Sequence
 
 
 DEFAULT_MAX_ATTACKS = 20
@@ -42,7 +42,7 @@ def team_arranges(teams: 'Iterable[str] | None'):
     return dict(parse_team_arrange(t) for t in teams)
 
 
-def parse_args():
+def parse_args(args: 'Sequence[str] | None' = None):
     parser = ArgumentParser(prog='Fangorn')
     parser.add_argument('-s', '--seed',
                         required=False,
@@ -61,10 +61,10 @@ def parse_args():
                         type=float,
                         default=.5)
 
-    args = parser.parse_args()
+    opts = parser.parse_args(args)
     return CliOptions(
-        seed=None if args.seed is None else args.seed.strip(),
-        max_attacks=args.max_attacks,
-        teams=team_arranges(args.teams),
-        delay=args.delay,
+        seed=None if opts.seed is None else opts.seed.strip(),
+        max_attacks=opts.max_attacks,
+        teams=team_arranges(opts.teams),
+        delay=opts.delay,
     )

@@ -1,5 +1,5 @@
 from typing import TYPE_CHECKING
-from time import sleep
+import time
 from fangorn.models.fighter_factory import FighterFactory
 from fangorn.models.battle_runner import BattleRunner
 from fangorn.models.destiny import Destiny
@@ -7,7 +7,7 @@ from fangorn.models.battle import Battle
 from fangorn.seed import seed
 from .parse_args import parse_args
 if TYPE_CHECKING:
-    from collections.abc import Iterable
+    from collections.abc import Iterable, Sequence
     from fangorn.models.fighter import Fighter
     from fangorn.models.attack import Attack
 
@@ -36,7 +36,7 @@ class CliBattleRunner(BattleRunner):
     def print(self, message: str):
         print(message)
         if self._delay > 0:
-            sleep(self._delay)
+            time.sleep(self._delay)
 
     def on_not_attacking(self, _: int, attacker: 'Fighter'):
         self.print(f'{attacker.name} somehow decided to do not attack!')
@@ -90,8 +90,8 @@ class CliBattleRunner(BattleRunner):
             self.print(f'{defender} died! RIP.')
 
 
-def main():
-    opts = parse_args()
+def main(args: 'Sequence[str] | None' = None):
+    opts = parse_args(args)
 
     the_seed = seed.deserialize_or_generate(opts.seed)
     destiny = Destiny(the_seed)
