@@ -11,7 +11,7 @@ format:
 	@$(PYTHON) -mautopep8 -air .
 
 lint:
-	@$(PYTHON) -mflake8 .
+	@$(PYTHON) -mflake8 --count --select=E,F,W --show-source --statistics .
 
 test:
 	@$(PYTHON) -mpytest
