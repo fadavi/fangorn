@@ -5,7 +5,13 @@
 ## Requiremenst
 Python 3.10.x
 
-## How to run:
+## How to run
+Directly using python:
 ```
-$ python3 -m fangorn
+$ python3 -mfangorn
+```
+
+Using make:
+```
+$ make run
 ```
