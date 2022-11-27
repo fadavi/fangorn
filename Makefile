@@ -7,6 +7,9 @@ ifneq (,$(wildcard ./requirements-dev.txt))
 	@$(PIP) install -r requirements-dev.txt
 endif
 
+format:
+	@$(PYTHON) -mautopep8 -air .
+
 lint:
 	@$(PYTHON) -mflake8 .
 
