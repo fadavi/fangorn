@@ -10,7 +10,7 @@ if TYPE_CHECKING:
 class Fighter(ABC):
     def __init__(self, team: str, name: str, strenght: float, defence: float,
                  speed: float, luck: float, health: float,
-                 skills: 'Iterable[Skill]' = []) -> None:
+                 skills: 'Iterable[Skill]' = []):
         super().__init__()
         self._team = team
         self._name = name

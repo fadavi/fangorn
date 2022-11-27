@@ -7,7 +7,7 @@ if TYPE_CHECKING:
 
 
 class MagicShield(Skill):
-    def __init__(self, probability: float, armor: float) -> None:
+    def __init__(self, probability: float, armor: float):
         super().__init__()
         self._probability = probability
         self._armor = armor

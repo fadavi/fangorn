@@ -7,7 +7,7 @@ if TYPE_CHECKING:
 
 
 class RapidStrike(Skill):
-    def __init__(self, probability: float, max_repeats=1) -> None:
+    def __init__(self, probability: float, max_repeats: int = 1):
         super().__init__()
         self._probability = probability
         self._max_repeats = max_repeats

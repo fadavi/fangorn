@@ -11,7 +11,7 @@ FighterCreator = Callable[[str], Fighter]
 
 
 class BaseFighterFactory(ABC):
-    def __init__(self, destiny: 'Destiny') -> None:
+    def __init__(self, destiny: 'Destiny'):
         self._destiny = destiny
         self._creators = self.init_creators()
 

@@ -9,7 +9,7 @@ VOWELS = 'aeiou'
 
 
 class Destiny(Random):
-    def __init__(self, seed: 'Seed') -> None:
+    def __init__(self, seed: 'Seed'):
         self._seed = seed
         super().__init__(seed)
 

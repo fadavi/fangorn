@@ -10,7 +10,7 @@ if TYPE_CHECKING:
 class Battle(ABC):
     def __init__(self,
                  destiny: 'Destiny',
-                 fighters: Iterable['Fighter']) -> None:
+                 fighters: Iterable['Fighter']):
         super().__init__()
         self._destiny = destiny
         self._fighters = list(fighters)
