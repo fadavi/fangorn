@@ -11,10 +11,23 @@ Directly using python:
 $ python3 -mfangorn
 ```
 
-Or using make:
+Or via make:
 ```bash
 $ make pvp # Orderus vs. Beast
 $ make tdm # Team Deathmatch
+```
+
+## How to run tests
+Directly using python:
+```bash
+$ python3 -mpip install -r requirements-dev.txt
+$ python3 -mpytest
+```
+
+Or via make:
+```bash
+$ make requirements-dev
+$ make test
 ```
 
 ## TODO
