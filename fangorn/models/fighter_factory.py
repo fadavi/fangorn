@@ -4,7 +4,6 @@ from .fighter import Fighter
 from .skill.magic_shield import MagicShield
 from .skill.rapid_strike import RapidStrike
 if TYPE_CHECKING:
-    from collections.abc import Iterable
     from .destiny import Destiny
 
 
@@ -24,7 +23,7 @@ class BaseFighterFactory(ABC):
         return create(team)
 
     def by_team_arranges(self,
-                         team_arranges: dict[str, 'Iterable[str]']):
+                         team_arranges: dict[str, list[str]]):
         for team, fighter_names in team_arranges.items():
             for fighter_name in fighter_names:
                 yield self.by_name(team, fighter_name)
