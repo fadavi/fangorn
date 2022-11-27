@@ -16,9 +16,10 @@ def generate() -> Seed:
 
 
 def seed_version():
-    parts = version.split('.')
-    if len(parts) == 0:
+    if version in (None, ''):
         return '0.0'
+
+    parts = version.split('.')
     if len(parts) == 1:
         return f'{parts[0]}.0'
     return f'{parts[0]}.{parts[1]}'
@@ -35,14 +36,14 @@ def deserialize(payload_enc: str) -> Seed:
     try:
         payload_json = b64decode(payload_enc.encode('ascii') + b'==')
         payload = json.loads(payload_json)
-    except BaseException as ex:
-        raise RuntimeError('Invalid seed') from ex
+    except ValueError as err:
+        raise ValueError('Invalid seed') from err
 
     if not isinstance(payload, list) or len(payload) != 2:
-        raise RuntimeError('Invalid seed')
+        raise ValueError('Invalid seed')
     if payload[0] != seed_version():
         print(payload[0])
-        raise RuntimeError('Unsupported seed version')
+        raise ValueError('Unsupported seed version')
 
     return payload[1]
 
