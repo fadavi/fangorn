@@ -5,8 +5,8 @@ if TYPE_CHECKING:
     from fangorn.seed.seed import Seed
 
 
+CONSONANTS = 'bcdfghjklmnpqrstvwxyz'
 VOWELS = 'aeiou'
-CONSONANTS = ''.join(sorted(set(ascii_lowercase) - set(VOWELS)))
 
 
 class Destiny(Random):
