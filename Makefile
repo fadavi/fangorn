@@ -11,7 +11,7 @@ lint:
 	@$(PYTHON) -mflake8 .
 
 test:
-	@$(PYTHON) -c 'print("Comming soon...")'
+	@$(PYTHON) -mpytest
 
 run:
 	@$(PYTHON) -mfangorn $(ARGS)
