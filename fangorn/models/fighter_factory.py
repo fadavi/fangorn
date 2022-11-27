@@ -67,6 +67,6 @@ class FighterFactory(BaseFighterFactory):
             strenght=destiny.decimal(60, 90),
             defence=destiny.decimal(40, 60),
             speed=destiny.decimal(40, 60),
-            luck=destiny.percent(.25, 40),
+            luck=destiny.percent(.25, .4),
             health=destiny.decimal(60, 90),
         )
