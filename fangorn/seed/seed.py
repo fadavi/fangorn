@@ -28,13 +28,16 @@ def seed_version():
 def serialize(seed: Seed) -> str:
     payload = [seed_version(), seed]
     payload_json = json.dumps(payload, separators=(',', ':'))
-    payload_enc = b64encode(payload_json.encode('ascii'))
-    return payload_enc.decode().strip('=')
+    encoded_payload = b64encode(payload_json.encode('ascii'))
+    return encoded_payload.decode().strip('=')
 
 
-def deserialize(payload_enc: str) -> Seed:
+def deserialize(encoded_payload: str) -> Seed:
+    """Raises ValueError if the encoded_payload is invalid
+    or belongs to an unsupported version.
+    """
     try:
-        payload_json = b64decode(payload_enc.encode('ascii') + b'==')
+        payload_json = b64decode(encoded_payload.encode('ascii') + b'==')
         payload = json.loads(payload_json)
     except ValueError as err:
         raise ValueError('Invalid seed') from err

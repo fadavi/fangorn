@@ -65,6 +65,9 @@ class Fighter(ABC):
         return self.health > 0
 
     def do_primary_action(self, attack: 'Attack'):
+        """A fighter do their primary action (strike or defence)
+        when they are the attacker or defender in an attack.
+        """
         if attack.attacker == self:
             damage = PrimaryStrike(-self.strenght, 'Attack', fighter=self)
             attack.add_effect(damage)
@@ -83,6 +86,6 @@ class Fighter(ABC):
 
     def choose_target(self, fighters: 'Iterable[Fighter]'):
         # For now, let's always attack the weakest one:
-        potential_targets = (
-            f for f in fighters if f.alive and not self.is_teammate(f))
+        potential_targets = (f for f in fighters
+                             if f.alive and not self.is_teammate(f))
         return min(potential_targets, default=None, key=lambda f: f.health)

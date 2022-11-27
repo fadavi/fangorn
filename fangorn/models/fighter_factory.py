@@ -16,10 +16,12 @@ class BaseFighterFactory(ABC):
         self._creators = self.init_creators()
 
     def by_name(self, team: str, name: str):
+        """Raises ValueError for invalid fighter name.
+        """
         name = name.strip().lower()
         create = self._creators.get(name)
         if create is None:
-            raise RuntimeError(f'Invalid fighter "{name}"')
+            raise ValueError(f'Invalid fighter "{name}"')
         return create(team)
 
     def by_team_arranges(self,

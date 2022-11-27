@@ -11,6 +11,8 @@ class Battle(ABC):
     def __init__(self,
                  destiny: 'Destiny',
                  fighters: Iterable['Fighter']):
+        """Raises ValueError if fighters is empty.
+        """
         super().__init__()
         self._destiny = destiny
         self._fighters = list(fighters)
@@ -40,6 +42,9 @@ class Battle(ABC):
         return fighters
 
     def potential_attackers(self):
+        """A fighter a potential attacker when they are preferably has
+        the least attacks, the most speed and the most luck.
+        """
         potential_attackers: list['Fighter'] = []
         best_speed: float = -1
         best_luck: float = -1
@@ -60,6 +65,9 @@ class Battle(ABC):
         return not any(self.alive_fighters())
 
     def winners(self):
+        """Returns the alive winners.
+        None means the battle is draw or is not finished yet.
+        """
         alive_fighters = self.alive_fighters()
 
         first_alive = next(alive_fighters, None)
@@ -81,6 +89,8 @@ class Battle(ABC):
             return self._destiny.choice(potential_attackers)
 
     def create_attack(self, attacker: 'Fighter'):
+        """None means the attacker prefers to not attack.
+        """
         self._attack_counts[attacker] += 1
 
         defender = attacker.choose_target(self.alive_fighters())
@@ -91,12 +101,18 @@ class Battle(ABC):
         return Attack(self._destiny, attacker, defender)
 
     def shuffled_others(self, *omitted_fighters: 'Fighter'):
+        """Omits provided omitted_fighters
+        and returns other fighters, shuffled.
+        """
         others = [f for f in self.alive_fighters()
                   if f not in omitted_fighters]
         self._destiny.shuffle(others)
         return others
 
     def finish_attack(self, attack: 'Attack'):
+        """An attack will be finished finished
+        when all fighters has done their turn.
+        """
         attacker, defender = attack.attacker, attack.defender
         others = self.shuffled_others(attacker, defender)
 
