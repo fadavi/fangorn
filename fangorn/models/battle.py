@@ -42,7 +42,7 @@ class Battle(ABC):
         return fighters
 
     def potential_attackers(self):
-        """A fighter is a potential attacker when they preferably have 
+        """A fighter is a potential attacker when they preferably have
         had the least attacks so far, and have got the most speed and luck.
         """
         potential_attackers: list['Fighter'] = []
